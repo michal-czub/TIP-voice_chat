@@ -38,23 +38,20 @@ class Server:
     def handle_client(self, conn, addr):
         print(f"<<< NEW CONNECTION >>> {addr} connected.")
         while True:
-            login = conn.recv(1024)
-            login_decoded = login.decode("utf-8")
-            password = conn.recv(1024)
-            password_decoded = password.decode("utf-8")
-            if login_decoded == "test":
-                self.LOGGED.append(conn)
-                self.logged = True
-                break
-            else:
-                pass
+            # login = conn.recv(1024)
+            # login_decoded = login.decode("utf-8")
+            # password = conn.recv(1024)
+            # password_decoded = password.decode("utf-8")
+            # if login_decoded == "test":
+            #     self.LOGGED.append(conn)
+            #     self.logged = True
+            #     break
+            # else:
+            #     pass
 
-        while self.logged:
-            try:
-                data = conn.recv(1024)
-                self.send_to_logged_clients(conn, data)
-            except Exception as err:
-                print(err)
+            # while self.logged:
+            data = conn.recv(1024)
+            self.send_to_logged_clients(conn, data)
 
     def server_start(self):
         self.SOCKET.listen()

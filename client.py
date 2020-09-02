@@ -31,7 +31,7 @@ class Client:
         # confirm = self.SOCKET.recv(1024)
         # confirmation = confirm.decode("utf-8", errors='ignore')
         # print(confirmation)
-        self.login()
+        # self.login()
         CHUNK = 1024
         RATE = 44100
         FORMAT = pyaudio.paInt16
