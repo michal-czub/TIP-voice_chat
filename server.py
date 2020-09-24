@@ -5,7 +5,8 @@ import time
 
 class Server:
     def __init__(self):
-        self.IP = socket.gethostbyname(socket.gethostname())
+        self.IP = "192.168.0.12"
+        #self.IP = socket.gethostbyname(socket.gethostname())
         self.PORT = 5050
         self.SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.ADDR = (self.IP, self.PORT)
@@ -38,18 +39,6 @@ class Server:
     def handle_client(self, conn, addr):
         print(f"<<< NEW CONNECTION >>> {addr} connected.")
         while True:
-            # login = conn.recv(1024)
-            # login_decoded = login.decode("utf-8")
-            # password = conn.recv(1024)
-            # password_decoded = password.decode("utf-8")
-            # if login_decoded == "test":
-            #     self.LOGGED.append(conn)
-            #     self.logged = True
-            #     break
-            # else:
-            #     pass
-
-            # while self.logged:
             data = conn.recv(1024)
             self.send_to_logged_clients(conn, data)
 
