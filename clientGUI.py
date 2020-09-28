@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QTimer, QDate, QTime
+from PyQt5.QtCore import QTimer, QDate, QTime, QThread
 from PyQt5.QtWidgets import QLabel
 import threading
 
@@ -67,7 +67,15 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def connect_button_clicked(self):
-        Ui_MainWindow.client.connect()
+        print("Przed polaczeniem")
+        self.thread = QThread()
+        self.thread.started(self.client.connect())
+        self.client.moveToThread(self.thread)
+        self.thread.exec()
+        #Ui_MainWindow.client.connect()
+
+
+        print("POOOOOpopopo")
 
     #def disconnet_button_clicked(self):
 
