@@ -5,8 +5,8 @@ import pyaudio
 
 class Client:
     def __init__(self):
-        self.IP = "192.168.0.12"
-        #self.IP = socket.gethostbyname(socket.gethostname())
+        # insert server IP below:
+        self.IP = ""
         self.PORT = 5050
         self.SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.ADDR = (self.IP, self.PORT)
@@ -14,7 +14,6 @@ class Client:
         self.HEADER = 64
 
     def connect(self):
-        print("DUPA connect")
         try:
             self.SOCKET.connect(self.ADDR)
         except Exception as err:
@@ -46,7 +45,7 @@ class Client:
                                            input_device=devinfo['index'],
                                            input_channels=devinfo['maxInputChannels'],
                                            input_format=pyaudio.paInt16):
-            print('works')
+            print('CONNECTED')
 
     def receive(self):
 
@@ -70,3 +69,4 @@ class Client:
 
 # client = Client()
 # print(client.__str__())
+# client.connect()

@@ -1,17 +1,5 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'clientUI.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QTimer, QDate, QTime, QThread
-from PyQt5.QtWidgets import QLabel
-import threading
-
 from client import Client
 
 
@@ -38,7 +26,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setFont(QtGui.QFont("Bahnschrift", 12))
         self.pushButton_2.setToolTip("<h3>Disconnect from the server</h3>")
         self.pushButton_2.setToolTipDuration(1500)
-        # self.pushButton_2.clicked.connect(self.disconnect_button_clicked)
+
 
         self.label8 = QtWidgets.QLabel(self.centralwidget)
         self.label8.setFont(QtGui.QFont("Bahnschrift", 25))
@@ -53,8 +41,6 @@ class Ui_MainWindow(object):
         self.label9.setGeometry(50, 175, 200, 50)
         date = QDate.currentDate().toString('dddd, MMM yyyy')
 
-        # print(QLocale(QLocale.English, QLocale.UnitedStates).toString(self, "MMMM dd, yyyy"))
-
         self.label9.setText(date)
 
 
@@ -67,17 +53,11 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def connect_button_clicked(self):
-        print("Przed polaczeniem")
         self.thread = QThread()
         self.thread.started(self.client.connect())
         self.client.moveToThread(self.thread)
         self.thread.exec()
-        #Ui_MainWindow.client.connect()
 
-
-        print("POOOOOpopopo")
-
-    #def disconnet_button_clicked(self):
 
     def clock_fun(self):
         current_time = QTime.currentTime()
@@ -85,12 +65,12 @@ class Ui_MainWindow(object):
         self.label8.setText(display_time)
 
 
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "ChatRoom"))
         self.pushButton.setText(_translate("MainWindow", "CONNECT"))
         self.pushButton_2.setText(_translate("MainWindow", "DISCONNECT"))
+
 
 if __name__ == "__main__":
     import sys

@@ -1,24 +1,16 @@
 import socket
 import threading
-import time
 
 
 class Server:
     def __init__(self):
-        self.IP = "192.168.0.12"
-        #self.IP = socket.gethostbyname(socket.gethostname())
+        self.IP = socket.gethostbyname(socket.gethostname())
         self.PORT = 5050
         self.SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.ADDR = (self.IP, self.PORT)
         self.HEADER = 64
         self.FORMAT = 'utf-8'
         self.CONNECTIONS = []
-        self.LOGGED = []
-        log_confirm = "Logged in!"
-        self.LOGIN_CONFIRMATION = log_confirm.encode("utf-8")
-        log_error = "Wrong login or password!"
-        self.LOGIN_ERROR = log_error.encode("utf-8")
-        self.logged = False
         try:
             print("Trying to bind...")
             self.SOCKET.bind(self.ADDR)
