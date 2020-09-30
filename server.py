@@ -1,6 +1,5 @@
 import socket
 import threading
-import time
 
 
 class Server:
@@ -12,12 +11,6 @@ class Server:
         self.HEADER = 64
         self.FORMAT = 'utf-8'
         self.CONNECTIONS = []
-        self.LOGGED = []
-        log_confirm = "Logged in!"
-        self.LOGIN_CONFIRMATION = log_confirm.encode("utf-8")
-        log_error = "Wrong login or password!"
-        self.LOGIN_ERROR = log_error.encode("utf-8")
-        self.logged = False
         try:
             print("Trying to bind...")
             self.SOCKET.bind(self.ADDR)
@@ -38,18 +31,6 @@ class Server:
     def handle_client(self, conn, addr):
         print(f"<<< NEW CONNECTION >>> {addr} connected.")
         while True:
-            # login = conn.recv(1024)
-            # login_decoded = login.decode("utf-8")
-            # password = conn.recv(1024)
-            # password_decoded = password.decode("utf-8")
-            # if login_decoded == "test":
-            #     self.LOGGED.append(conn)
-            #     self.logged = True
-            #     break
-            # else:
-            #     pass
-
-            # while self.logged:
             data = conn.recv(1024)
             self.send_to_logged_clients(conn, data)
 

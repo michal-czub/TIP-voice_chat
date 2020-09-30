@@ -5,33 +5,21 @@ import pyaudio
 
 class Client:
     def __init__(self):
-        self.IP = socket.gethostbyname(socket.gethostname())
+        # insert server IP below:
+        self.IP = ""
         self.PORT = 5050
         self.SOCKET = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.ADDR = (self.IP, self.PORT)
         self.FORMAT = 'utf-8'
         self.HEADER = 64
 
+    def connect(self):
         try:
             self.SOCKET.connect(self.ADDR)
         except Exception as err:
             print(err)
             print(f"[CAN'T CONNECT TO]: {self.ADDR}")
 
-        # # LOGIN
-        # login = input("Enter login >>>")
-        # login_encoded = login.encode("utf-8")
-        # self.SOCKET.sendall(login_encoded)
-        #
-        # # PASSWORD
-        # password = input("Enter password >>>")
-        # password_encoded = password.encode("utf-8")
-        # self.SOCKET.sendall(password_encoded)
-        #
-        # confirm = self.SOCKET.recv(1024)
-        # confirmation = confirm.decode("utf-8", errors='ignore')
-        # print(confirmation)
-        # self.login()
         CHUNK = 1024
         RATE = 44100
         FORMAT = pyaudio.paInt16
@@ -43,8 +31,6 @@ class Client:
         self.outputStream = self.py_aud.open(format=FORMAT, rate=RATE,
                                              frames_per_buffer=CHUNK,
                                              channels=CHANNELS, output=True)
-        # print('...Waiting for data...')
-        # print(self.py_aud.get_default_host_api_info())
         thread = threading.Thread(target=self.receive)
         thread.start()
 
@@ -59,18 +45,7 @@ class Client:
                                            input_device=devinfo['index'],
                                            input_channels=devinfo['maxInputChannels'],
                                            input_format=pyaudio.paInt16):
-            print('works')
-
-    def login(self):
-        # LOGIN
-        login = input("Enter login >>>")
-        login_encoded = login.encode("utf-8")
-        self.SOCKET.sendall(login_encoded)
-
-        # PASSWORD
-        password = input("Enter password >>>")
-        password_encoded = password.encode("utf-8")
-        self.SOCKET.sendall(password_encoded)
+            print('CONNECTED')
 
     def receive(self):
 
@@ -92,5 +67,6 @@ class Client:
                 break
 
 
-client = Client()
-print(client.__str__())
+# client = Client()
+# print(client.__str__())
+# client.connect()
